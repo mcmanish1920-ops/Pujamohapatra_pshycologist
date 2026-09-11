@@ -25,96 +25,75 @@ body{background:var(--paper);font-size:15px;line-height:1.65}
 .service-request{position:absolute;left:20px;bottom:18px;border:0;background:transparent;color:var(--primary);font:700 10px 'DM Sans';letter-spacing:.03em;padding:7px 0;cursor:pointer;opacity:.78;transition:opacity .2s ease,transform .2s ease}.service-request span{margin-left:5px}.service-card:hover .service-request{opacity:1;transform:translateX(3px)}
 @media(max-width:760px){.service-request{font-size:9px;left:15px;bottom:13px}.service-card{padding-bottom:45px}}
 
-/* V22 logo lockup: the image itself contains only "Puja Mohapatra" + "Psychologist". */
-.brand { display:flex; align-items:center; }
-.brand img { width:190px; height:auto; max-height:48px; object-fit:contain; display:block; }
-.brand span { display:none; }
-.footer-grid > div:first-child img { width:210px; max-width:100%; height:auto; object-fit:contain; }
-@media (max-width:760px){
-  .brand img { width:150px; max-height:42px; }
+
+/* V24.3 — consolidated media/frame system. This block intentionally replaces all earlier experimental frame overrides. */
+.brand img,.footer-grid img{display:block;width:auto;height:auto;max-width:100%;max-height:52px;object-fit:contain!important;border-radius:0!important}
+
+/* Shared media frame: the frame owns the geometry; the image fills it without stretching. */
+.hero-photo,.portrait-frame,.about-photo,.journey-photo,.approach-photo,.faq-image,.gallery-card{
+  position:relative!important;overflow:hidden!important;isolation:isolate!important;
+}
+.hero-photo img,.portrait-frame img,.about-photo img,.journey-photo img,.approach-photo img,.faq-image img,.gallery-card img{
+  display:block!important;width:100%!important;height:100%!important;max-width:none!important;min-width:0!important;min-height:0!important;
+  margin:0!important;padding:0!important;border:0!important;object-fit:cover!important;object-position:50% 50%!important;
 }
 
-/* V23 Customize Center: subtle customizable section imagery */
-main section.has-custom-section-image{position:relative;overflow:hidden}
-main section.has-custom-section-image::before{content:"";position:absolute;inset:0;background-image:var(--section-image);background-position:center;background-size:cover;background-repeat:no-repeat;opacity:.10;pointer-events:none;z-index:0}
-main section.has-custom-section-image>*{position:relative;z-index:1}
-
-
-/* V24 hardening: content must never depend on JavaScript reveal state. */
-main{display:block!important;visibility:visible!important;}
-main>section{display:block!important;visibility:visible!important;opacity:1!important;transform:none!important;}
-.reveal,.js .reveal,.js .reveal.in{opacity:1!important;visibility:visible!important;transform:none!important;}
-
-/* V24.1 image-frame polish: every visual stays inside its intended frame */
-img{max-width:100%;}
-.hero-photo,.about-photo,.journey-photo,.approach-photo,.faq-image,.gallery-card,.portrait-frame{overflow:hidden;isolation:isolate;}
-.hero-photo img,.about-photo img,.journey-photo img,.approach-photo img,.faq-image img,.gallery-card img,.portrait{display:block;width:100%;height:100%;object-fit:cover;object-position:center;}
-.portrait-frame{aspect-ratio:4/5;height:auto;max-height:520px;}
-.about-photo{aspect-ratio:4/3;height:auto;}
-.journey-photo{aspect-ratio:4/3;height:auto;}
-.approach-photo{aspect-ratio:4/3;height:auto;}
-.faq-image{aspect-ratio:16/7;height:auto;}
-.practice-gallery{align-items:stretch;}
-.gallery-card,.gallery-card:first-child{height:auto;aspect-ratio:4/3;}
-.gallery-card:first-child{aspect-ratio:5/4;}
-.gallery-card img{object-position:center center;}
-.brand img,.footer-grid img{object-fit:contain!important;height:auto!important;}
-.principles:before{background-position:center center;}
-@media(max-width:760px){
- .portrait-frame{aspect-ratio:4/5;height:auto;max-height:none;}
- .about-photo{aspect-ratio:4/3;height:auto;}
- .journey-photo,.approach-photo{aspect-ratio:4/3;height:auto;}
- .faq-image{aspect-ratio:16/8;height:auto;}
- .gallery-card,.gallery-card:first-child{height:auto;aspect-ratio:4/3;}
- .gallery-card:first-child{grid-column:1/-1;aspect-ratio:16/10;}
- .practice-gallery{grid-auto-rows:auto;}
-}
-
-/* V24.2 — FINAL IMAGE FRAME SYSTEM */
-:root{--media-radius:28px}
-
-/* Never allow a media element to escape its designed card/frame. */
-.hero-photo,.portrait-frame,.about-photo,.journey-photo,.approach-photo,.faq-image,.gallery-card{overflow:hidden!important;position:relative!important;isolation:isolate!important}
-.hero-photo img,.portrait-frame img,.about-photo img,.journey-photo img,.approach-photo img,.faq-image img,.gallery-card img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;min-width:0!important;min-height:0!important;object-fit:cover!important;object-position:center center!important;margin:0!important;padding:0!important;border:0!important}
+/* Header */
+.brand{min-width:0}
+.brand img{max-width:190px;max-height:48px}
 
 /* Hero */
-.portrait-frame{width:min(560px,100%)!important;height:590px!important;aspect-ratio:auto!important;border-radius:42% 42% 16px 16px!important}
-.portrait-frame .portrait{height:100%!important;width:100%!important;object-fit:cover!important;object-position:center top!important}
+.hero-photo{height:520px!important;align-self:stretch!important}
+.portrait-frame{width:min(510px,100%)!important;height:520px!important;max-height:none!important;margin-left:auto!important;border-radius:46% 46% 0 0!important;background:#dce5d9}
+.portrait-frame .portrait{object-position:50% 28%!important}
 
-/* Editorial image cards */
-.about-photo{height:500px!important;aspect-ratio:auto!important;border-radius:28px!important}
-.about-photo img{object-position:center center!important}
-.journey-photo{height:370px!important;aspect-ratio:auto!important;border-radius:24px!important}
-.approach-photo{height:430px!important;aspect-ratio:auto!important;border-radius:24px!important}
+/* About */
+.about-photo{height:420px!important;border-radius:28px 70px 28px 28px!important}
+.about-photo img{object-position:50% 50%!important}
 
-/* Practice gallery: equal, clean cards */
-.practice-gallery{display:grid!important;grid-template-columns:1.25fr 1fr 1fr!important;gap:18px!important;align-items:stretch!important}
-.gallery-card,.gallery-card:first-child{height:360px!important;aspect-ratio:auto!important;margin:0!important;border-radius:22px!important;overflow:hidden!important}
-.gallery-card img{height:100%!important;width:100%!important;object-fit:cover!important;object-position:center center!important}
+/* Journey */
+.journey-photo{height:390px!important;border-radius:24px!important}
+.journey-photo img{object-position:50% 50%!important}
+
+/* Approach */
+.approach-photo{height:390px!important;border-radius:24px!important}
+.approach-photo img{object-position:50% 50%!important}
+
+/* Practice gallery — three consistent frames */
+.practice-gallery{display:grid!important;grid-template-columns:1.2fr 1fr 1fr!important;gap:16px!important;align-items:stretch!important}
+.gallery-card,.gallery-card:first-child{height:330px!important;min-height:0!important;margin:0!important;border-radius:22px!important;overflow:hidden!important}
+.gallery-card img{object-position:50% 50%!important}
 .gallery-card figcaption{position:absolute!important;left:0!important;right:0!important;bottom:0!important;z-index:2!important}
 
-/* FAQ image gets a real card instead of an overly-wide strip */
-.faq-image{height:260px!important;aspect-ratio:auto!important;border-radius:24px!important;margin-top:28px!important}
-.faq-image img{object-position:center center!important}
+/* Reviews: cards remain content-driven; no image stretching */
+.review-card{overflow:hidden}
 
-/* Logo must remain contained, never cropped */
-.brand img,.footer-grid img{width:auto!important;height:auto!important;max-width:100%!important;max-height:52px!important;object-fit:contain!important;border-radius:0!important}
+/* FAQ */
+.faq-image{height:250px!important;border-radius:24px!important;margin-top:28px!important}
+.faq-image img{object-position:50% 50%!important}
 
-@media(max-width:950px){
- .portrait-frame{height:520px!important}
- .about-photo{height:420px!important}
- .journey-photo{height:340px!important}
- .approach-photo{height:380px!important}
- .gallery-card,.gallery-card:first-child{height:300px!important}
+/* Contact / footer */
+.contact{overflow:hidden}
+footer{overflow:hidden}
+
+@media (max-width:950px){
+  .hero-photo{height:500px!important}
+  .portrait-frame{height:500px!important;width:100%!important}
+  .about-photo{height:400px!important}
+  .journey-photo,.approach-photo{height:350px!important}
+  .gallery-card,.gallery-card:first-child{height:300px!important}
+  .faq-image{height:240px!important}
 }
 
-@media(max-width:760px){
- .brand img{max-height:42px!important;width:auto!important;max-width:155px!important}
- .portrait-frame{width:100%!important;height:430px!important;border-radius:34% 34% 16px 16px!important}
- .about-photo{height:340px!important;border-radius:24px!important}
- .journey-photo,.approach-photo{height:320px!important;border-radius:22px!important}
- .practice-gallery{grid-template-columns:1fr!important;gap:14px!important}
- .gallery-card,.gallery-card:first-child{height:270px!important;aspect-ratio:auto!important;grid-column:auto!important;border-radius:20px!important}
- .gallery-card:first-child{height:290px!important}
- .faq-image{height:230px!important;border-radius:20px!important}
+@media (max-width:760px){
+  .brand img{max-width:155px!important;max-height:42px!important}
+  .hero-photo{height:430px!important;width:100%!important}
+  .portrait-frame{width:100%!important;height:430px!important;border-radius:34% 34% 18px 18px!important}
+  .portrait-frame .portrait{object-position:50% 24%!important}
+  .about-photo{height:330px!important;border-radius:24px!important}
+  .journey-photo,.approach-photo{height:300px!important;border-radius:22px!important}
+  .practice-gallery{grid-template-columns:1fr!important;gap:14px!important}
+  .gallery-card,.gallery-card:first-child{height:260px!important;grid-column:auto!important;border-radius:20px!important}
+  .gallery-card:first-child{height:280px!important}
+  .faq-image{height:220px!important;border-radius:20px!important}
 }
