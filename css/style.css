@@ -97,3 +97,74 @@ footer{overflow:hidden}
   .gallery-card:first-child{height:280px!important}
   .faq-image{height:220px!important;border-radius:20px!important}
 }
+
+/* V24.4 — real image-frame architecture. The wrapper controls geometry; images never control frame size. */
+.media-frame{position:relative;display:block;overflow:hidden;isolation:isolate;background:#e5e8df;border-radius:var(--frame-radius,24px);}
+.media-frame::after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.28);border-radius:inherit;pointer-events:none;z-index:3;}
+.media-frame>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;display:block!important;margin:0!important;padding:0!important;border:0!important;object-fit:cover!important;object-position:50% 50%!important;transform:none!important;}
+.brand-logo-frame,.footer-logo-frame{display:flex;align-items:center;justify-content:flex-start;position:relative;overflow:hidden;background:transparent;flex:0 0 auto;}
+.brand-logo-frame{width:190px;height:50px;}
+.footer-logo-frame{width:210px;height:62px;margin-bottom:12px;}
+.brand-logo-frame img,.footer-logo-frame img{position:static!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:left center!important;display:block!important;border-radius:0!important;}
+
+/* Hero: one explicit frame, never stretched by the image. */
+.hero-photo{height:520px!important;display:flex!important;align-items:flex-end!important;justify-content:flex-end!important;}
+.portrait-frame{position:relative!important;width:min(510px,100%)!important;height:520px!important;overflow:hidden!important;flex:0 0 auto!important;}
+.portrait-frame .portrait{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:50% 28%!important;transform-origin:center!important;}
+
+/* Content photos */
+.about-photo,.journey-photo,.approach-photo{position:relative!important;overflow:hidden!important;}
+.about-photo img,.journey-photo img,.approach-photo img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:50% 50%!important;}
+
+/* Practice: fixed cards with identical geometry. */
+.practice-gallery{display:grid!important;grid-template-columns:1.2fr 1fr 1fr!important;gap:16px!important;align-items:stretch!important;}
+.gallery-card,.gallery-card:first-child{position:relative!important;width:100%!important;height:330px!important;min-height:330px!important;margin:0!important;padding:0!important;overflow:hidden!important;border-radius:22px!important;background:#e5e8df!important;}
+.gallery-card img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important;object-position:50% 50%!important;display:block!important;margin:0!important;}
+.gallery-card figcaption{position:absolute!important;left:0!important;right:0!important;bottom:0!important;z-index:4!important;box-sizing:border-box!important;}
+
+/* Reviews: an actual framed image, not a background-size guess. */
+.reviews{position:relative;overflow:hidden;}
+.reviews-layout{display:grid;grid-template-columns:minmax(280px,.78fr) minmax(0,1.22fr);gap:54px;align-items:center;}
+.reviews-photo{height:430px;width:100%;border-radius:30px 90px 30px 30px;box-shadow:0 24px 55px rgba(0,0,0,.14);}
+.reviews-content{min-width:0;}
+.review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+
+/* FAQ */
+.faq-image{position:relative!important;width:100%!important;height:260px!important;margin-top:28px!important;overflow:hidden!important;border-radius:24px!important;}
+.faq-image img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:50% 50%!important;}
+
+/* Contact: image and copy share a controlled panel. */
+.contact-grid{align-items:stretch!important;}
+.contact-copy{display:flex!important;flex-direction:column!important;gap:22px!important;min-width:0!important;}
+.contact-photo{height:255px!important;width:100%!important;border-radius:28px 72px 28px 28px!important;flex:0 0 auto!important;box-shadow:0 22px 50px rgba(0,0,0,.12)!important;}
+.contact-copy-text{min-width:0;}
+
+/* Footer logo gets a real box too, while preserving the logo's aspect ratio. */
+.footer-logo-frame img{object-position:left center!important;}
+
+@media(max-width:950px){
+  .brand-logo-frame{width:165px;height:46px;}
+  .hero-photo{height:500px!important;}
+  .portrait-frame{width:100%!important;height:500px!important;}
+  .reviews-layout{grid-template-columns:1fr;gap:34px;}
+  .reviews-photo{height:320px;border-radius:26px 70px 26px 26px;}
+  .review-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .gallery-card,.gallery-card:first-child{height:300px!important;min-height:300px!important;}
+  .contact-photo{height:280px!important;}
+}
+@media(max-width:760px){
+  .brand-logo-frame{width:155px;height:42px;}
+  .footer-logo-frame{width:190px;height:54px;}
+  .hero-photo{height:430px!important;width:100%!important;}
+  .portrait-frame{width:100%!important;height:430px!important;border-radius:34% 34% 18px 18px!important;}
+  .portrait-frame .portrait{object-position:50% 24%!important;}
+  .about-photo{height:330px!important;border-radius:24px!important;}
+  .journey-photo,.approach-photo{height:300px!important;border-radius:22px!important;}
+  .practice-gallery{grid-template-columns:1fr!important;gap:14px!important;}
+  .gallery-card,.gallery-card:first-child{height:280px!important;min-height:280px!important;border-radius:20px!important;}
+  .reviews-layout{gap:26px;}
+  .reviews-photo{height:270px;border-radius:22px 55px 22px 22px;}
+  .review-grid{grid-template-columns:1fr;}
+  .faq-image{height:220px!important;border-radius:20px!important;}
+  .contact-photo{height:220px!important;border-radius:22px 55px 22px 22px!important;}
+}
