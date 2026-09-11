@@ -29,7 +29,7 @@ h2{font:500 34px "Playfair Display",serif;margin:0 0 8px}h3{font:600 18px "DM Sa
 <div class="top-actions"><a class="btn light" href="index.html">View Website</a><button class="btn primary" id="saveTop" type="button">Save Changes</button></div>
 </div></header>
 <main>
-<div class="eyebrow">V23 · Website editor</div>
+<div class="eyebrow">V27 · Website editor</div>
 <h1 class="title">Make the practice feel exactly the way you want.</h1>
 <p class="intro">Edit content, images and visual settings here. Changes are saved in this browser and applied when the main website is opened on the same device/browser.</p>
 <div class="tabs"><button class="tab active" data-tab="content">Content</button><button class="tab" data-tab="images">Images</button><button class="tab" data-tab="design">Design</button></div>
@@ -70,10 +70,10 @@ h2{font:500 34px "Playfair Display",serif;margin:0 0 8px}h3{font:600 18px "DM Sa
 <script>
 (()=>{
 'use strict';
-const KEY='pujaSiteConfigV23',DB='pujaSiteCustomizerV23', $=id=>document.getElementById(id);
+const KEY='pujaSiteConfigV27',DB='pujaSiteCustomizerV27', $=id=>document.getElementById(id);
 const base=window.SITE_CONFIG||{};let state=merge(base,read());
 function merge(a,b){if(!b)return JSON.parse(JSON.stringify(a||{}));const o=Array.isArray(a)?a.slice():{...a};Object.keys(b).forEach(k=>o[k]=b[k]&&typeof b[k]==='object'&&!Array.isArray(b[k])?merge(o[k]||{},b[k]):b[k]);return o}
-function read(){try{return JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('pujaSiteConfigV21')||'null')}catch(e){return null}}
+function read(){try{return JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('pujaSiteConfigV26')||localStorage.getItem('pujaSiteConfigV23')||localStorage.getItem('pujaSiteConfigV21')||'null')}catch(e){return null}}
 function set(id,v){if($(id))$(id).value=v??''}function get(id){return $(id).value}
 function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function populate(){
@@ -102,8 +102,8 @@ function save(msg){
 $('contentForm').onsubmit=e=>{e.preventDefault();save('Content saved ✓')};$('saveTop').onclick=()=>save('All settings saved ✓');$('radius').oninput=()=>$('radiusOut').textContent=get('radius')+'px';$('saveDesign').onclick=()=>save('Design saved ✓');
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));t.classList.add('active');$(t.dataset.tab).classList.add('active')});
 
-const slots=[['hero','Hero','Main portrait / hero image'],['about','About','About section image'],['services','Services','Subtle services visual'],['journey','Journey','Journey section image'],['practice','Practice','Practice gallery lead image'],['approach','Approach','Approach section image'],['reviews','Reviews','Reviews band background'],['faq','FAQ','FAQ section visual'],['contact','Contact','Contact section visual'],['cta','CTA','Call-to-action visual']];
-const defs={hero:'assets/hero.jpg',about:'assets/about.jpg',services:'assets/services.jpg',journey:'assets/journey.jpg',practice:'assets/practice-1.jpg',approach:'assets/approach.jpg',reviews:'assets/principles.jpg',faq:'assets/faq.svg',contact:'assets/contact.jpg',cta:'assets/principles.jpg'};
+const slots=[['logo','Logo','Header and footer logo'],['hero','Hero','Main portrait / hero image'],['about','About','About section image'],['services','Services','Subtle services visual'],['journey','Journey','Journey section image'],['practice','Practice','Practice gallery lead image'],['practice2','Practice Gallery 2','Second gallery image'],['practice3','Practice Gallery 3','Third gallery image'],['approach','Approach','Approach section image'],['reviews','Reviews','Reviews section visual'],['faq','FAQ','FAQ section visual'],['contact','Contact','Contact section visual'],['cta','CTA','Call-to-action visual']];
+const defs={logo:'assets/logo.png',hero:'assets/hero.jpg',about:'assets/about.jpg',services:'assets/services.jpg',journey:'assets/journey.jpg',practice:'assets/practice-1.jpg',practice2:'assets/practice-2.jpg',practice3:'assets/practice-3.jpg',approach:'assets/approach.jpg',reviews:'assets/practice-3.jpg',faq:'assets/faq.svg',contact:'assets/contact.jpg',cta:'assets/principles.jpg'};
 function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open(DB,1);r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains('images'))r.result.createObjectStore('images',{keyPath:'id'})};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}
 async function rows(){const db=await openDB();return new Promise((res,rej)=>{const r=db.transaction('images','readonly').objectStore('images').getAll();r.onsuccess=()=>res(r.result||[]);r.onerror=()=>rej(r.error)})}
 async function put(id,dataUrl){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction('images','readwrite');tx.objectStore('images').put({id,dataUrl});tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
@@ -115,7 +115,7 @@ async function renderImages(){let rs=[];try{rs=await rows()}catch(e){}const map=
  $('imageGrid').onclick=async e=>{const b=e.target.closest('[data-remove]');if(!b)return;const id=b.dataset.remove;await del(id);$('preview-'+id).src=def(id);$('imageStatus-'+id).textContent='Using website default ✓'};
 }
 populate();renderImages();
-$('resetAll').onclick=async()=>{if(!confirm('Reset all saved website customizations on this browser?'))return;localStorage.removeItem(KEY);try{const db=await openDB();await new Promise((res,rej)=>{const tx=db.transaction('images','readwrite');tx.objectStore('images').clear();tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}catch(e){}location.reload()};
+$('resetAll').onclick=async()=>{if(!confirm('Reset all saved website customizations on this browser?'))return;localStorage.removeItem(KEY);localStorage.removeItem('pujaSiteConfigV26');localStorage.removeItem('pujaSiteConfigV23');try{const db=await openDB();await new Promise((res,rej)=>{const tx=db.transaction('images','readwrite');tx.objectStore('images').clear();tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}catch(e){}location.reload()};
 })();
 </script>
 </body></html>
