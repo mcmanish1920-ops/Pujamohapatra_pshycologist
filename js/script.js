@@ -20,8 +20,8 @@ function render(){
    journey:'assets/journey.jpg',
    approach:'assets/approach.jpg',
    practice:'assets/practice-1.jpg',
-   reviews:'assets/principles.jpg',
-   faq:'assets/contact.jpg',
+   reviews:'assets/practice-3.jpg',
+   faq:'assets/faq.svg',
    contact:'assets/contact.jpg'
  };
  const hero=$('#heroImage'); if(hero) hero.src=imageDefaults.hero;
