@@ -168,3 +168,29 @@ footer{overflow:hidden}
   .faq-image{height:220px!important;border-radius:20px!important;}
   .contact-photo{height:220px!important;border-radius:22px 55px 22px 22px!important;}
 }
+
+
+/* V24.5 — final frame geometry: the frame owns dimensions; image owns cropping only. */
+.hero-photo,.portrait-frame,.about-photo,.journey-photo,.approach-photo,.reviews-photo,.faq-image,.contact-photo,.gallery-card{contain:layout paint;}
+.portrait-frame,.about-photo,.journey-photo,.approach-photo,.reviews-photo,.faq-image,.contact-photo,.gallery-card{flex:none;}
+.gallery-card img,.about-photo img,.journey-photo img,.approach-photo img,.reviews-photo img,.faq-image img,.contact-photo img{object-fit:cover!important;}
+@media (min-width:761px){
+  .portrait-frame{width:510px!important;height:520px!important;}
+  .about-photo{height:360px!important;}
+  .journey-photo{height:370px!important;}
+  .approach-photo{height:340px!important;}
+  .gallery-card,.gallery-card:first-child{height:290px!important;}
+  .reviews-photo{height:390px!important;}
+  .faq-image{height:250px!important;}
+  .contact-photo{height:300px!important;}
+}
+@media (max-width:760px){
+  .portrait-frame{width:100%!important;height:auto!important;aspect-ratio:4/5!important;}
+  .hero-photo{height:auto!important;min-height:0!important;}
+  .about-photo{height:auto!important;aspect-ratio:4/3!important;}
+  .journey-photo,.approach-photo{height:auto!important;aspect-ratio:4/3!important;}
+  .gallery-card,.gallery-card:first-child{height:auto!important;min-height:0!important;aspect-ratio:4/3!important;}
+  .reviews-photo{height:auto!important;aspect-ratio:4/3!important;}
+  .faq-image{height:auto!important;aspect-ratio:16/9!important;}
+  .contact-photo{height:auto!important;aspect-ratio:16/9!important;}
+}
