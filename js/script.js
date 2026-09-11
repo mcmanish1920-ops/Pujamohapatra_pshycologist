@@ -20,7 +20,7 @@ function render(){
    journey:'assets/journey.jpg',
    approach:'assets/approach.jpg',
    practice:'assets/practice-1.jpg',
-   reviews:null,
+   reviews:'assets/principles.jpg',
    faq:'assets/contact.jpg',
    contact:'assets/contact.jpg'
  };
@@ -60,8 +60,10 @@ render();
    r.onsuccess=()=>resolve(r.result||[]);r.onerror=()=>reject(r.error);
  });
  Object.entries(Object.fromEntries(rows.map(x=>[x.id,x.dataUrl]).filter(x=>x[1]))).forEach(([id,url])=>{
-   const img=$('#'+id+'Image'); if(img) img.src=url;
-   const section=$('#'+id); if(section){section.style.setProperty('--section-image',`url("${url}")`);section.classList.add('has-custom-section-image');}
+   const img=$('#'+id+'Image');
+   if(img){img.src=url; img.removeAttribute('srcset'); img.style.objectPosition='50% 50%';}
+   const section=$('#'+id);
+   if(section){section.style.setProperty('--section-image',`url("${url}")`);section.classList.add('has-custom-section-image');}
    if(id==='practice'){const first=$('#practiceImage');if(first)first.src=url;}
  });
 }catch(e){console.warn('Customize images unavailable',e)}})();
