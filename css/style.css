@@ -44,3 +44,28 @@ main section.has-custom-section-image>*{position:relative;z-index:1}
 main{display:block!important;visibility:visible!important;}
 main>section{display:block!important;visibility:visible!important;opacity:1!important;transform:none!important;}
 .reveal,.js .reveal,.js .reveal.in{opacity:1!important;visibility:visible!important;transform:none!important;}
+
+/* V24.1 image-frame polish: every visual stays inside its intended frame */
+img{max-width:100%;}
+.hero-photo,.about-photo,.journey-photo,.approach-photo,.faq-image,.gallery-card,.portrait-frame{overflow:hidden;isolation:isolate;}
+.hero-photo img,.about-photo img,.journey-photo img,.approach-photo img,.faq-image img,.gallery-card img,.portrait{display:block;width:100%;height:100%;object-fit:cover;object-position:center;}
+.portrait-frame{aspect-ratio:4/5;height:auto;max-height:520px;}
+.about-photo{aspect-ratio:4/3;height:auto;}
+.journey-photo{aspect-ratio:4/3;height:auto;}
+.approach-photo{aspect-ratio:4/3;height:auto;}
+.faq-image{aspect-ratio:16/7;height:auto;}
+.practice-gallery{align-items:stretch;}
+.gallery-card,.gallery-card:first-child{height:auto;aspect-ratio:4/3;}
+.gallery-card:first-child{aspect-ratio:5/4;}
+.gallery-card img{object-position:center center;}
+.brand img,.footer-grid img{object-fit:contain!important;height:auto!important;}
+.principles:before{background-position:center center;}
+@media(max-width:760px){
+ .portrait-frame{aspect-ratio:4/5;height:auto;max-height:none;}
+ .about-photo{aspect-ratio:4/3;height:auto;}
+ .journey-photo,.approach-photo{aspect-ratio:4/3;height:auto;}
+ .faq-image{aspect-ratio:16/8;height:auto;}
+ .gallery-card,.gallery-card:first-child{height:auto;aspect-ratio:4/3;}
+ .gallery-card:first-child{grid-column:1/-1;aspect-ratio:16/10;}
+ .practice-gallery{grid-auto-rows:auto;}
+}
