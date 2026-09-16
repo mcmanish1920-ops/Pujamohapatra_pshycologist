@@ -1052,3 +1052,30 @@ animation-iteration-count: 1 !important;
 transition-duration: .01ms !important;
 }
 }
+/* COMPACT PREMIUM HEADER */
+.site-header {
+  padding: 10px 0 !important;
+}
+
+.nav-container {
+  min-height: 62px !important;
+}
+
+.site-header img {
+  max-height: 48px;
+  width: auto;
+}
+
+@media (max-width: 600px) {
+  .site-header {
+    padding: 7px 0 !important;
+  }
+
+  .nav-container {
+    min-height: 54px !important;
+  }
+
+  .site-header img {
+    max-height: 40px;
+  }
+  }
