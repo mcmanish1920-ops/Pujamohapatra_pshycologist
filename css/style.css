@@ -1205,24 +1205,43 @@ section {
   .menu-toggle {
     display: block;
   }
+  @media (max-width: 800px) {
+:root {
+    --header-height: 64px;
+  }
 
-  .mobile-nav {
-    position: fixed;
-    top: var(--header-height);
-    left: 15px;
-    right: 15px;
+  .container,
+  .nav-container,
+  .hero-content {
+    width: min(calc(100% - 30px), var(--container));
+  }
 
-    display: grid;
-    gap: 4px;
+  .site-header {
+    height: var(--header-height);
+  }
 
-    padding: 14px;
+  .site-header img {
+    width: 36px;
+    height: 36px;
+  }
 
-    background: rgba(252, 250, 246, 0.98);
-    border: 1px solid var(--border);
-    border-radius: 18px;
+  .brand-name,
+  .brand-text strong {
+    font-size: 14px;
+  }
 
-    box-shadow: var(--shadow);
+  .brand-subtitle,
+  .brand-text span {
+    font-size: 7px;
+  }
 
-    opacity: 0;
-    visibility: hidden;
-    transform: tr
+  .desktop-nav {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+    
+    
+
